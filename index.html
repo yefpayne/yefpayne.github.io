@@ -6,128 +6,133 @@
     <title>yefpayne | Unity Game Dev</title>
     <link rel="icon" type="image/png" href="https://github.com/yefpayne.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Press Start 2P', cursive; 
-            background-color: #f0f2f5; 
-            color: #1f2937; 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding: 40px 15px;
-            font-size: 10px; /* Okunabilirlik için genel boyutu düşürdük */
-        }
-        
-        .profile-section { text-align: center; margin-bottom: 30px; }
-        .profile-img { width: 90px; height: 90px; border-radius: 15px; border: 4px solid #fff; box-shadow: 0 8px 0px #d1d5db; margin-bottom: 20px; }
-        h1 { margin: 0; font-size: 1.2em; letter-spacing: -1px; }
-        .tagline { color: #6b7280; margin-top: 10px; font-size: 0.7em; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f9fafb; color: #1f2937; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 50px 20px; }
+        .profile-section { text-align: center; margin-bottom: 40px; }
+        .profile-img { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { margin: 0; font-size: 1.6em; font-weight: 700; color: #111827; }
+        p { color: #6b7280; margin-top: 10px; font-size: 1.1em; }
 
+        /* 3 Sütunlu Izgara Yapısı */
         .links-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 10px; 
+            gap: 12px; 
             width: 100%; 
-            max-width: 500px; 
+            max-width: 550px; 
+            margin-top: 20px;
         }
         @media (max-width: 480px) { .links-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .link-item { 
-            background: white; padding: 12px 5px; border-radius: 8px; text-decoration: none; 
-            color: #374151; font-size: 0.55em; text-align: center;
-            transition: 0.1s; border: 3px solid #e5e7eb; 
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            background: white; padding: 18px 10px; border-radius: 16px; text-decoration: none; 
+            color: #374151; font-size: 0.85em; font-weight: 600; text-align: center;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #e5e7eb; 
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
-        .link-item:hover { transform: scale(0.95); border-color: #111827; background-color: #f9fafb; }
+        .link-item:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: #d1d5db; background-color: #fff; }
+        .link-item i { font-size: 1.6em; }
 
-        .games-container { margin-top: 50px; width: 100%; max-width: 650px; }
-        .games-container h2 { text-align: center; margin-bottom: 20px; font-size: 1em; border-bottom: 4px solid #e5e7eb; padding-bottom: 10px; }
+        /* Oyun Kartları Düzenlemesi */
+        .games-container { margin-top: 60px; width: 100%; max-width: 750px; }
+        .games-container h2 { text-align: center; margin-bottom: 30px; font-size: 1.4em; }
         
         .game-card { 
-            background: white; border-radius: 12px; overflow: hidden; margin-bottom: 20px;
-            display: flex; flex-direction: column; border: 4px solid #e5e7eb;
+            background: white; border-radius: 24px; overflow: hidden; margin-bottom: 25px;
+            display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;
+            transition: 0.3s ease;
         }
         .game-header { display: flex; text-decoration: none; color: inherit; }
-        .game-card img { width: 180px; height: 130px; object-fit: cover; border-right: 4px solid #e5e7eb; }
-        .game-details { padding: 15px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .game-details h3 { margin: 0 0 8px 0; font-size: 0.8em; color: #111827; }
-        .game-details p { font-size: 0.55em; line-height: 1.6; color: #4b5563; }
+        .game-card img { width: 220px; height: 160px; object-fit: cover; }
+        .game-details { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .game-details h3 { margin: 0 0 8px 0; font-size: 1.2em; }
         
+        /* Buton Grubu */
         .button-group { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 8px; 
-            padding: 12px; 
-            background: #f9fafb;
+            gap: 10px; 
+            padding: 15px 20px 20px; 
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
         }
         .btn-play { 
-            padding: 10px 4px; border-radius: 6px; text-decoration: none; 
-            font-size: 0.5em; text-align: center; transition: 0.1s;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            border-bottom: 4px solid rgba(0,0,0,0.2);
+            padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 600; 
+            font-size: 0.85em; text-align: center; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
+        /* Play Store Buton Rengi Değişti: Profesyonel Koyu Ton */
         .btn-store { background: #1f2937; color: white; } 
         .btn-itch { background: #FA5C5C; color: white; }
-        .btn-play:active { transform: translateY(2px); border-bottom-width: 0; }
+        .btn-play:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        @media (max-width: 600px) { 
+        @media (max-width: 640px) { 
             .game-header { flex-direction: column; } 
-            .game-card img { width: 100%; height: 160px; border-right: none; border-bottom: 4px solid #e5e7eb; } 
+            .game-card img { width: 100%; height: 200px; } 
         }
         
-        footer { margin-top: 40px; padding-bottom: 20px; color: #9ca3af; font-size: 0.5em; text-align: center; }
+        footer { margin-top: 60px; padding-bottom: 20px; color: #9ca3af; font-size: 0.8em; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="profile-section">
         <img src="https://github.com/yefpayne.png" class="profile-img" alt="yefpayne">
-        <h1>YEFPAYNE</h1>
-        <div class="tagline">UNITY ILE OYUN GELISTIRIYOR VE YAYINLIYORUM.</div>
+        <h1>yefpayne | Unity Game Dev</h1>
+        <p>Unity ile oyun geliştiriyor ve yayınlıyorum.</p>
     </div>
 
     <div class="links-grid">
         <a href="https://www.youtube.com/@yefpayne" target="_blank" class="link-item">
-            <i class="fab fa-youtube" style="color:#FF0000; font-size: 1.2em;"></i>YOUTUBE
+            <i class="fab fa-youtube" style="color:#FF0000"></i>YouTube
         </a>
         <a href="https://www.instagram.com/yefpayne" target="_blank" class="link-item">
-            <i class="fab fa-instagram" style="color:#E1306C; font-size: 1.2em;"></i>INSTAGRAM
+            <i class="fab fa-instagram" style="color:#E1306C"></i>Instagram
         </a>
         <a href="https://www.tiktok.com/@yefpayne" target="_blank" class="link-item">
-            <i class="fab fa-tiktok" style="color:#000000; font-size: 1.2em;"></i>TIKTOK
+            <i class="fab fa-tiktok" style="color:#000000"></i>TikTok
         </a>
         <a href="https://play.google.com/store/apps/dev?id=5115297245000304725" target="_blank" class="link-item">
-            <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 18px; height: 18px;" alt="Play Store">
-             PLAY STORE
+            <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 22px; height: 22px; object-fit: contain;" alt="Play Store">
+            Play Store
         </a>
         <a href="https://yefpayne.itch.io" target="_blank" class="link-item">
-            <i class="fab fa-itch-io" style="color:#FA5C5C; font-size: 1.2em;"></i>ITCH.IO
+            <i class="fab fa-itch-io" style="color:#FA5C5C"></i>Itch.io
         </a>
         <a href="https://github.com/yefpayne" target="_blank" class="link-item">
-            <i class="fab fa-github" style="color:#333; font-size: 1.2em;"></i>GITHUB
+            <i class="fab fa-github" style="color:#333"></i>GitHub
+        </a>
+        <a href="https://www.fiverr.com/yefpayne?public_mode=true" target="_blank" class="link-item">
+            <img src="https://img.icons8.com/ios_filled/200/40C057/fiverr--v2.png" style="width: 25px; height: 25px;" alt="Fiverr">
+            Fiverr
+        </a>
+        <a href="https://bionluk.com/yefpayne" target="_blank" class="link-item">
+            <img src="https://play-lh.googleusercontent.com/XDKGzDD_jjY_KrqZg3COTdV9oW5e4lZjgOPGP07aOIaNsCqNdvcmVrocc7XFr01PdR0P" style="width: 25px; height: 25px; border-radius: 5px;" alt="Bionluk">
+            Bionluk
+        </a>
+        <a href="https://www.shopier.com/yefpayne" target="_blank" class="link-item">
+            <i class="fas fa-shopping-cart" style="color:#2d3e50"></i>Shopier
         </a>
     </div>
 
     <div class="games-container">
-        <h2>OYUNLARIM</h2>
+        <h2>Oyunlarım</h2>
         
         <div class="game-card">
             <div class="game-header">
                 <img src="https://img.itch.zone/aW1nLzI1ODE0OTMyLnBuZw==/315x250%23c/Tf2gJn.png" alt="Step Perfect">
                 <div class="game-details">
-                    <h3>STEP PERFECT</h3>
-                    <p>RITMI YAKALA VE EN YUKSEK SKORU YAP!</p>
+                    <h3>Step Perfect</h3>
+                    <p>Ritmi yakala ve en yüksek skoru yap!</p>
                 </div>
             </div>
             <div class="button-group">
                 <a href="https://play.google.com/store/apps/details?id=com.yefpayne.stepperfect" target="_blank" class="btn-play btn-store">
-                    <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 14px; height: 14px;" alt="Play Store">
-                    PLAY STORE
+                    <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 18px; height: 18px; object-fit: contain;" alt="Play Store">
+                    Play Store
                 </a>
                 <a href="https://yefpayne.itch.io/step-perfect" target="_blank" class="btn-play btn-itch">
-                    <i class="fab fa-itch-io"></i> ITCH.IO
+                    <i class="fab fa-itch-io"></i> Itch.io
                 </a>
             </div>
         </div>
@@ -136,24 +141,24 @@
             <div class="game-header">
                 <img src="https://img.itch.zone/aW1nLzI0ODE3MjM3LnBuZw==/315x250%23c/3hlCQ6.png" alt="Farmyn">
                 <div class="game-details">
-                    <h3>FARMYN</h3>
-                    <p>CIFTLIK SIMULASYONU DENEYIMI SENI BEKLIYOR.</p>
+                    <h3>Farmyn</h3>
+                    <p>Çiftlik Simülasyonu deneyimi seni bekliyor.</p>
                 </div>
             </div>
             <div class="button-group">
                 <a href="https://play.google.com/store/apps/details?id=com.Yefpayne.Farmyn" target="_blank" class="btn-play btn-store">
-                    <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 14px; height: 14px;" alt="Play Store">
-                    PLAY STORE
+                    <img src="https://freelogopng.com/images/all_img/1664285914google-play-logo-png.png" style="width: 18px; height: 18px; object-fit: contain;" alt="Play Store">
+                    Play Store
                 </a>
                 <a href="https://yefpayne.itch.io/farmyn" target="_blank" class="btn-play btn-itch">
-                    <i class="fab fa-itch-io"></i> ITCH.IO
+                    <i class="fab fa-itch-io"></i> Itch.io
                 </a>
             </div>
         </div>
     </div>
 
     <footer>
-        © 2026 YEFPAYNE
+        © 2026 yefpayne
     </footer>
 
 </body>
