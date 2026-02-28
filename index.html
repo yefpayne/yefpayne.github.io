@@ -7,13 +7,65 @@
     <link rel="icon" type="image/png" href="https://github.com/yefpayne.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f9fafb; color: #1f2937; margin: 0; display: flex; flex-direction: column; align-items: center; padding: 50px 20px; }
+        /* GENEL TASARIM */
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background-color: #f3f4f6; /* Hafif gri-doğa tonu */
+            color: #1f2937; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 50px 20px; 
+            overflow-x: hidden;
+        }
+
+        /* --- YAPRAK EFEKTİ CSS --- */
+        .leaf-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .leaf {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-color: #4ade80; /* Canlı yaprak yeşili */
+            border-radius: 0 100%;
+            opacity: 0.2;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(110vh) translateX(150px) rotate(720deg); opacity: 0; }
+        }
+
+        /* Yaprakların rastgele dağılımı */
+        .leaf:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: -2s; }
+        .leaf:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: -5s; width: 15px; height: 15px; background-color: #22c55e; }
+        .leaf:nth-child(3) { left: 40%; animation-duration: 15s; animation-delay: -1s; }
+        .leaf:nth-child(4) { left: 60%; animation-duration: 22s; animation-delay: -8s; width: 25px; height: 25px; background-color: #84cc16; }
+        .leaf:nth-child(5) { left: 85%; animation-duration: 14s; animation-delay: -4s; }
+        .leaf:nth-child(6) { left: 15%; animation-duration: 25s; animation-delay: -10s; opacity: 0.1; }
+        .leaf:nth-child(7) { left: 70%; animation-duration: 16s; animation-delay: -3s; background-color: #16a34a; }
+        .leaf:nth-child(8) { left: 95%; animation-duration: 20s; animation-delay: -6s; }
+
+        /* PROFİL VE LİNKLER (MEVCUT TASARIMIN) */
         .profile-section { text-align: center; margin-bottom: 40px; }
         .profile-img { width: 110px; height: 110px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; }
         h1 { margin: 0; font-size: 1.6em; font-weight: 700; color: #111827; }
         p { color: #6b7280; margin-top: 10px; font-size: 1.1em; }
 
-        /* 3 Sütunlu Izgara Yapısı */
         .links-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -30,13 +82,12 @@
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #e5e7eb; 
             display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
-        .link-item:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: #d1d5db; background-color: #fff; }
+        .link-item:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: #d1d5db; }
         .link-item i { font-size: 1.6em; }
 
-        /* Oyun Kartları Düzenlemesi */
+        /* OYUN KARTLARI */
         .games-container { margin-top: 60px; width: 100%; max-width: 750px; }
         .games-container h2 { text-align: center; margin-bottom: 30px; font-size: 1.4em; }
-        
         .game-card { 
             background: white; border-radius: 24px; overflow: hidden; margin-bottom: 25px;
             display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;
@@ -47,7 +98,6 @@
         .game-details { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .game-details h3 { margin: 0 0 8px 0; font-size: 1.2em; }
         
-        /* Buton Grubu */
         .button-group { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -61,7 +111,6 @@
             font-size: 0.85em; text-align: center; transition: 0.2s;
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        /* Play Store Buton Rengi Değişti: Profesyonel Koyu Ton */
         .btn-store { background: #1f2937; color: white; } 
         .btn-itch { background: #FA5C5C; color: white; }
         .btn-play:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -75,6 +124,17 @@
     </style>
 </head>
 <body>
+
+    <div class="leaf-container">
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+    </div>
 
     <div class="profile-section">
         <img src="https://github.com/yefpayne.png" class="profile-img" alt="yefpayne">
@@ -107,7 +167,7 @@
             Fiverr
         </a>
         <a href="https://bionluk.com/yefpayne" target="_blank" class="link-item">
-            <img src="https://play-lh.googleusercontent.com/XDKGzDD_jjY_KrqZg3COTdV9oW5e4lZjgOPGP07aOIaNsCqNdvcmVrocc7XFr01PdR0P" style="width: 25px; height: 25px; border-radius: 5px;" alt="Bionluk">
+            <img src="https://github.com/yefpayne.png" style="width: 25px; height: 25px; border-radius: 5px;" alt="Bionluk">
             Bionluk
         </a>
         <a href="https://www.shopier.com/yefpayne" target="_blank" class="link-item">
